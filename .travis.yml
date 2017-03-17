@@ -15,7 +15,15 @@ before_script:
   - gulp
 
 script:
-  - xvfb-run testem ci --reporter dot
+  #- xvfb-run testem ci --reporter dot
+  - npm install gemini selenium-standalone
+  - selenium-standalone install
+  - export DISPLAY=:99
+  - /etc/init.d/xvfb start
+  - selenium-standalone start
+  - sleep 10
+  - gemini test
+  - /etc/init.d/xvfb stop
 
 deploy:
   api_key:
